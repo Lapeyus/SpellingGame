@@ -335,8 +335,8 @@ async function saveScore() {
     };
 
     try {
-        // Replace with actual deployed Apps Script Web App URL
-        const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        // ACTUAL deployed Apps Script Web App URL
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycby4oaBzdeJMfr3-TRUwGWDSyh704mOtVO4RRQgqgorKxWv6ofmBU9dJLX07Sw0SvMIdrg/exec';
 
         await fetch(scriptUrl, {
             method: 'POST',
@@ -403,8 +403,8 @@ async function loadLeaderboard() {
     list.style.display = 'none';
     list.innerHTML = '';
 
-    // Replace with ACTUAL url for the leaderboard
-    const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    // ACTUAL url for the leaderboard
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycby4oaBzdeJMfr3-TRUwGWDSyh704mOtVO4RRQgqgorKxWv6ofmBU9dJLX07Sw0SvMIdrg/exec';
     if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         loading.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please configure the Apps Script URL in app.js';
         return;
