@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Adventure!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="view active-view">
+            <h1 class="logo-text">🚀 Spelling Adventure 🌟</h1>
+            <p class="subtitle">Choose your dictation list!</p>
+
+            <div class="mode-selector">
+                <label class="mode-btn">
+                    <input type="radio" name="gameMode" value="practice" checked>
+                    <span class="mode-text">Practice</span>
+                </label>
+                <label class="mode-btn">
+                    <input type="radio" name="gameMode" value="test">
+                    <span class="mode-text">Test</span>
+                </label>
+                <label class="mode-btn">
+                    <input type="radio" name="gameMode" value="competitive">
+                    <span class="mode-text">Competitive 🏆</span>
+                </label>
+            </div>
+
+            <div class="level-cards">
+                <button class="menu-btn english-btn" onclick="startGame('english')">
+                    <span class="icon">🇺🇸</span>
+                    <span class="title">English List</span>
+                    <span class="date">Feb 24</span>
+                </button>
+                <button class="menu-btn spanish-btn" onclick="startGame('spanish')">
+                    <span class="icon">🇪🇸</span>
+                    <span class="title">Lista Español</span>
+                    <span class="date">26 de febrero</span>
+                </button>
+                <button class="menu-btn leaderboard-btn" onclick="showLeaderboard()">
+                    <span class="icon">🏆</span>
+                    <span class="title">Leaderboard</span>
+                    <span class="date">Top Scores</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div id="game-view" class="view">
+            <header class="game-header">
+                <button class="icon-btn" onclick="returnToMenu()">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <span class="progress-text" id="progress-text">1/10</span>
+                </div>
+                <div class="stars-counter">
+                    <i class="fa-solid fa-star"></i> <span id="score-text">0</span>
+                </div>
+            </header>
+
+            <main class="game-board">
+                <div class="image-container">
+                    <img id="word-image" src="" alt="Word Illustration">
+                    <button class="sound-btn pulse" id="sound-btn" onclick="playWordSound()">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+
+                <div class="interaction-area">
+                    <!-- Drop targets / Answer slots -->
+                    <div class="answer-slots" id="answer-slots">
+                        <!-- Slots generated dynamically -->
+                    </div>
+
+                    <!-- Scrambled Letters -->
+                    <div class="letter-bank" id="letter-bank">
+                        <!-- Letters generated dynamically -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn check-btn" id="check-btn" onclick="checkWord()">Check ✨</button>
+                </div>
+            </main>
+        </div>
+
+        <!-- Score Screen -->
+        <div id="score-view" class="view">
+            <h2 class="congrats-text">Amazing Job! 🎉</h2>
+            <div class="final-score-display">
+                <i class="fa-solid fa-star fa-beat"></i>
+                <span id="final-score">10/10</span>
+            </div>
+            <p id="saving-indicator"
+                style="display: none; color: var(--primary); font-weight: 600; margin-bottom: 20px;">
+                <i class="fa-solid fa-spinner fa-spin"></i> Saving score...
+            </p>
+            <button class="action-btn menu-btn" onclick="returnToMenu()">Play Again</button>
+        </div>
+
+        <!-- Student Login Modal -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <h2>Student Details</h2>
+                <p>Please enter your nickname to record your score in Competitive Mode.</p>
+                <div class="form-group">
+                    <label for="studentName">Nickname (for privacy):</label>
+                    <input type="text" id="studentName" placeholder="e.g. StarSpeller99" autocomplete="off"
+                        maxlength="15">
+                </div>
+                <div class="form-group">
+                    <label for="studentSection">Section:</label>
+                    <select id="studentSection">
+                        <option value="" disabled selected>Select your section</option>
+                        <option value="2-1">2-1</option>
+                        <option value="2-2">2-2</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="cancel-btn" onclick="cancelLogin()">Cancel</button>
+                    <button class="start-btn" onclick="submitLoginAndStart()">Start Challenge 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard View -->
+        <div id="leaderboard-view" class="view">
+            <header class="game-header">
+                <button class="icon-btn" onclick="returnToMenu()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 style="color: var(--primary); margin: 0 auto;">Top Spellers</h2>
+            </header>
+            <main class="leaderboard-content"
+                style="flex:1; overflow-y: auto; width: 100%; border-radius: 12px; background: white; padding: 16px; box-shadow: var(--shadow);">
+                <div id="leaderboard-loading" style="text-align: center; color: var(--primary); padding: 20px;">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Loading scores...
+                </div>
+                <ul id="leaderboard-list" style="list-style: none; padding: 0; display: none;">
+                    <!-- Items generated by JS -->
+                </ul>
+            </main>
+        </div>
+
+        <footer class="branding-footer">
+            Costa Rica - 2026
+        </footer>
+    </div>
+
+    <!-- Celebration confetti container -->
+    <div id="confetti-container"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
