@@ -336,7 +336,7 @@ async function saveScore() {
 
     try {
         // ACTUAL deployed Apps Script Web App URL
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbymB8dgIZOoVGaRU8b2UhPNndPSDyADTkKe8CrXDXKLT1TKf8NumCmdic9wV8sSfFmYHw/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbwvOxIHFsePa5VnUPXAnRsBkDGhfQLzhJ4OuyV4zSAPDLAFbqj0SUhaK7knQZ2dI09O7Q/exec';
 
         await fetch(scriptUrl, {
             method: 'POST',
@@ -404,7 +404,7 @@ async function loadLeaderboard() {
     list.innerHTML = '';
 
     // ACTUAL url for the leaderboard
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbymB8dgIZOoVGaRU8b2UhPNndPSDyADTkKe8CrXDXKLT1TKf8NumCmdic9wV8sSfFmYHw/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwvOxIHFsePa5VnUPXAnRsBkDGhfQLzhJ4OuyV4zSAPDLAFbqj0SUhaK7knQZ2dI09O7Q/exec';
     if (scriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         loading.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please configure the Apps Script URL in app.js';
         return;
